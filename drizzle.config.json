@@ -1,0 +1,4 @@
+{
+  "schema": "./app/drizzle/schemas/*",
+  "out": "./migrations"
+} 

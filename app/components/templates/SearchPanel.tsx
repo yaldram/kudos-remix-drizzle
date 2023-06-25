@@ -2,11 +2,11 @@ import type { User } from "~/drizzle/schemas/users.db.server";
 import { getUserProfile } from "~/utils/helpers";
 import { Avatar } from "../atoms";
 
-type SearchBarProps = {
+type SearchPanelProps = {
   user: User;
 };
 
-export function SearchBar(props: SearchBarProps) {
+export function SearchPanel(props: SearchPanelProps) {
   return (
     <div className="w-full px-6 items-center gap-x-4 border-b-4 border-b-yellow-300 h-20 flex justify-end p-2">
       <Avatar

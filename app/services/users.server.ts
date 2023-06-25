@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
-import { eq } from "drizzle-orm";
+import { eq, ne } from "drizzle-orm";
+
 import { db } from "~/drizzle/config.db.server";
 import { users } from "~/drizzle/schemas/users.db.server";
 import type { NewUser } from "~/drizzle/schemas/users.db.server";
@@ -21,4 +22,12 @@ export async function createUser(user: NewUser) {
       lastName: user.lastName,
     })
     .returning();
+}
+
+export function getOtherUsers(loggedInUserId: string) {
+  return db.select().from(users).where(ne(users.id, loggedInUserId));
+}
+
+export function getUserById(userId: string) {
+  return db.select().from(users).where(eq(users.id, userId));
 }

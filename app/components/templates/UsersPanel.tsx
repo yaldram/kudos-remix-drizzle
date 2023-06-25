@@ -1,5 +1,7 @@
+import { useNavigate } from "@remix-run/react";
 import type { User } from "~/drizzle/schemas/users.db.server";
 import { getUserProfile } from "~/utils/helpers";
+
 import { Button, Avatar } from "../atoms";
 
 type UsersPanelProps = {
@@ -7,6 +9,8 @@ type UsersPanelProps = {
 };
 
 export function UsersPanel(props: UsersPanelProps) {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="text-center bg-gray-300 h-20 flex items-center justify-center">
@@ -18,6 +22,7 @@ export function UsersPanel(props: UsersPanelProps) {
             key={user.id}
             userProfile={getUserProfile(user)}
             className="h-24 w-24 mx-auto flex-shrink-0"
+            onClick={() => navigate(`kudo/${user.id}`)}
           />
         ))}
       </div>

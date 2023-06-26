@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { eq, ne } from "drizzle-orm";
 
 import { db } from "~/drizzle/config.db.server";
+import type { User } from "~/drizzle/schemas/users.db.server";
 import { users } from "~/drizzle/schemas/users.db.server";
 import type { NewUser } from "~/drizzle/schemas/users.db.server";
 
@@ -30,4 +31,18 @@ export function getOtherUsers(loggedInUserId: string) {
 
 export function getUserById(userId: string) {
   return db.select().from(users).where(eq(users.id, userId));
+}
+
+export function updateUser(
+  payload: Pick<User, "id" | "firstName" | "lastName">
+) {
+  return db
+    .update(users)
+    .set(payload)
+    .where(eq(users.id, payload.id))
+    .returning();
+}
+
+export function deleteUser(userId: string) {
+  return db.delete(users).where(eq(users.id, userId));
 }

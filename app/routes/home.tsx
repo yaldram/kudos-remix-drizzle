@@ -46,10 +46,10 @@ export default function HomePage() {
           <SearchPanel user={loggedInUser} />
           <div className="flex-1 flex">
             <div className="w-full p-10 flex flex-col gap-y-4">
-              {receivedKudos.map(({ author, kudo }) => (
+              {receivedKudos.map((kudo) => (
                 <KudoCard
                   key={kudo.id}
-                  userProfile={getUserProfile(author as User)}
+                  userProfile={getUserProfile(kudo.author as User)}
                   kudo={kudo}
                 />
               ))}
